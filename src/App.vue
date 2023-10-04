@@ -6,7 +6,6 @@
       <todo-list-item v-bind:label="todo.label" v-bind:done="todo.done" v-bind:id="todo.id"></todo-list-item>
     </li>
   </ul>
-  
 </template>
 
 <script>
@@ -27,7 +26,7 @@ export default {
         { id: uniqueId('task-'), label: 'learn vue', done: false },
         { id: uniqueId('task-'), label: 'drink coffee', done: true },
         { id: uniqueId('task-'), label: 'my taxes', done: false },
-      ],
+      ],  
     };
   },
   methods: {
@@ -44,6 +43,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 60px;
+}
+ul {
+  list-style-type: none;
 }
 </style>
