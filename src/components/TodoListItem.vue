@@ -1,6 +1,8 @@
 <template>
-    <input v-bind:id="id" type="checkbox" v-bind:checked="isDone" />
-    <label v-bind:for="id">{{ label }}</label>
+    <div>
+        <input v-bind:id="id" type="checkbox" v-bind:checked="isDone" />
+        <label v-bind:for="id">{{ label }}</label>
+    </div>
 </template>
 
 <script>
@@ -18,3 +20,12 @@
         },
     }
 </script>
+
+<style scoped>
+    div {
+        margin: 6px;
+    }
+    input {
+        margin: 8px;
+    }
+</style>
