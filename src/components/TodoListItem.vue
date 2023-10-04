@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input v-bind:id="id" type="checkbox" v-bind:checked="isDone" />
+        <input v-bind:id="id" type="checkbox" v-bind:checked="isDone" v-on:change="onChange" />
         <label v-bind:for="id">{{ label }}</label>
     </div>
 </template>
@@ -18,6 +18,11 @@
                 isDone: this.done,
             };
         },
+        methods: {
+            onChange() {
+                this.$emit('checkbox-changed');
+            },
+        }
     }
 </script>
 

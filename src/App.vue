@@ -1,9 +1,10 @@
 <template>
   <todo-form v-on:task-created="addTask"></todo-form>
   <h1>To-do:</h1>
-  <ul>
+  <p id="summary">{{summary}}</p>
+  <ul aria-labelledby="#summary">
     <li v-for="todo in toDoItems" v-bind:key="todo.id">
-      <todo-list-item v-bind:label="todo.label" v-bind:done="todo.done" v-bind:id="todo.id"></todo-list-item>
+      <todo-list-item v-bind:label="todo.label" v-bind:done="todo.done" v-bind:id="todo.id" v-on:checkbox-changed="updateCheckbox(todo.id)"></todo-list-item>
     </li>
   </ul>
 </template>
@@ -33,7 +34,17 @@ export default {
     addTask(text) {
       this.toDoItems.push({ id: uniqueId('task-'), label: text, done: false });
     },
+    updateCheckbox(taskID) {
+      const todoItem = this.toDoItems.find((item) => (item.id === taskID));
+      todoItem.done = !todoItem.done;
+    },
   },
+  computed: {
+    summary() {
+      const completed = this.toDoItems.filter((item) => item.done).length;
+      return `${completed}/${this.toDoItems.length} tasks complete`;
+    }
+  }
 }
 </script>
 
