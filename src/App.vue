@@ -24,9 +24,11 @@ export default {
   data() {
     return {
       toDoItems: [
-        { id: uniqueId('task-'), label: 'learn vue', done: false },
-        { id: uniqueId('task-'), label: 'drink coffee', done: true },
-        { id: uniqueId('task-'), label: 'my taxes', done: false },
+        { id: uniqueId('task-'), label: 'receive $200', done: false },
+        { id: uniqueId('task-'), label: 'code', done: true },
+        { id: uniqueId('task-'), label: 'win', done: true },
+        { id: uniqueId('task-'), label: 'drink', done: false },
+        { id: uniqueId('task-'), label: 'get naked', done: false },
       ],  
     };
   },
