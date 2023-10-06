@@ -46,7 +46,8 @@ export default {
       todoItem.label = newLabel;
     },
     deleteTask(taskID) {
-      this.todoItems = this.todoItems.filter((item) => item.id !== taskID);
+      const i = this.todoItems.findIndex((item) => item.id === taskID);
+      this.todoItems.splice(i, 1);
     }
   },
   computed: {
