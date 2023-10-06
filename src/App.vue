@@ -4,13 +4,14 @@
   <p id="summary">{{summary}}</p>
   <ul aria-labelledby="#summary">
     <li v-for="todo in toDoItems" v-bind:key="todo.id">
-      <todo-list-item v-bind:label="todo.label" v-bind:done="todo.done" v-bind:id="todo.id" v-on:checkbox-changed="updateCheckbox(todo.id)"></todo-list-item>
+      <todo-item v-bind:label="todo.label" v-bind:done="todo.done" v-bind:id="todo.id" v-on:checkbox-changed="updateCheckbox(todo.id)" 
+        v-on:task-edit-save="updateTaskLabel(todo.id, $event)"></todo-item>
     </li>
   </ul>
 </template>
 
 <script>
-import TodoListItem from './components/TodoListItem.vue';
+import TodoItem from './components/TodoItem.vue';
 import TodoForm from './components/TodoForm.vue';
 import uniqueId from 'lodash.uniqueid';
 
@@ -18,7 +19,7 @@ import uniqueId from 'lodash.uniqueid';
 export default {
   name: 'App',
   components: {
-    TodoListItem, 
+    TodoItem, 
     TodoForm,
   },
   data() {
@@ -37,8 +38,12 @@ export default {
       this.toDoItems.push({ id: uniqueId('task-'), label: text, done: false });
     },
     updateCheckbox(taskID) {
-      const todoItem = this.toDoItems.find((item) => (item.id === taskID));
+      const todoItem = this.toDoItems.find((item) => item.id === taskID);
       todoItem.done = !todoItem.done;
+    },
+    updateTaskLabel(taskID, newLabel) {
+      const todoItem = this.toDoItems.find((item) => item.id === taskID);
+      todoItem.label = newLabel;
     },
   },
   computed: {
