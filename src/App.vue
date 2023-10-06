@@ -3,9 +3,9 @@
   <h1>To-do:</h1>
   <p id="summary">{{summary}}</p>
   <ul aria-labelledby="#summary">
-    <li v-for="todo in toDoItems" v-bind:key="todo.id">
+    <li v-for="todo in todoItems" v-bind:key="todo.id">
       <todo-item v-bind:label="todo.label" v-bind:done="todo.done" v-bind:id="todo.id" v-on:checkbox-changed="updateCheckbox(todo.id)" 
-        v-on:task-edit-save="updateTaskLabel(todo.id, $event)"></todo-item>
+        v-on:task-edit-save="updateTaskLabel(todo.id, $event)" v-on:task-deleted="deleteTask(todo.id)"></todo-item>
     </li>
   </ul>
 </template>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      toDoItems: [
+      todoItems: [
         { id: uniqueId('task-'), label: 'receive $200', done: false },
         { id: uniqueId('task-'), label: 'code', done: true },
         { id: uniqueId('task-'), label: 'win', done: true },
@@ -35,21 +35,24 @@ export default {
   },
   methods: {
     addTask(text) {
-      this.toDoItems.push({ id: uniqueId('task-'), label: text, done: false });
+      this.todoItems.push({ id: uniqueId('task-'), label: text, done: false });
     },
     updateCheckbox(taskID) {
-      const todoItem = this.toDoItems.find((item) => item.id === taskID);
+      const todoItem = this.todoItems.find((item) => item.id === taskID);
       todoItem.done = !todoItem.done;
     },
     updateTaskLabel(taskID, newLabel) {
-      const todoItem = this.toDoItems.find((item) => item.id === taskID);
+      const todoItem = this.todoItems.find((item) => item.id === taskID);
       todoItem.label = newLabel;
     },
+    deleteTask(taskID) {
+      this.todoItems = this.todoItems.filter((item) => item.id !== taskID);
+    }
   },
   computed: {
     summary() {
-      const completed = this.toDoItems.filter((item) => item.done).length;
-      return `${completed}/${this.toDoItems.length} tasks complete`;
+      const completed = this.todoItems.filter((item) => item.done).length;
+      return `${completed}/${this.todoItems.length} tasks complete`;
     }
   }
 }
