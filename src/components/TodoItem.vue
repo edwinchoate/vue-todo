@@ -2,7 +2,7 @@
     <div v-if="!isEditing">
         <input v-bind:id="id" type="checkbox" v-bind:checked="isDone" v-on:change="onCheckboxChange" />
         <label v-bind:for="id">{{ label }}</label>
-        <button v-on:click="onEditClick" type="button">Edit</button>
+        <button v-on:click="onEditClick" ref="editButton" type="button">Edit</button>
         <button v-on:click="onDeleteClick" type="button">Delete</button>
     </div>
     <todo-item-edit-form v-else v-bind:old-label="label" v-bind:id="id" v-on:task-edit-save="saveEdit"
@@ -38,6 +38,7 @@
             },
             onEditClick() {
                 this.isEditing = true;
+                console.log(this.$refs.editButton);
             },
             onDeleteClick() {
                 this.$emit('task-deleted');
@@ -45,9 +46,17 @@
             saveEdit(newLabel) {
                 this.$emit('task-edit-save', newLabel);
                 this.isEditing = false;
+                this.focusOnEditBtn();
             },
             cancelEdit() {
                 this.isEditing = false;
+                this.focusOnEditBtn();
+            },
+            focusOnEditBtn() {
+                this.$nextTick(() => {
+                    const editBtn = this.$refs.editButton;
+                    editBtn.focus();
+                });
             },
         }
     }

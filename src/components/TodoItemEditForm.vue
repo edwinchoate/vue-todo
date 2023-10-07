@@ -1,6 +1,6 @@
 <template>
     <form v-on:submit.prevent="onSubmit">
-        <input type="text" autocomplete="off" v-model.trim="newLabel" />
+        <input type="text" autocomplete="off" ref="labelInput" v-model.trim="newLabel" />
         <button type="submit">✔</button>
         <button type="button" v-on:click="onCancel">✖</button>
     </form>
@@ -17,6 +17,11 @@
             return {    
                 newLabel: this.oldLabel,
             }
+        },
+        mounted() {
+            const labelInput = this.$refs.labelInput;
+            labelInput.focus();
+            labelInput.select();
         },
         methods: {
             onSubmit() {

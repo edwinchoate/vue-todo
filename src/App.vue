@@ -1,7 +1,7 @@
 <template>
   <todo-form v-on:task-created="addTask"></todo-form>
   <h1>To-do:</h1>
-  <p id="summary">{{summary}}</p>
+  <p id="summary" ref="summary" tabindex="-1">{{summary}}</p>
   <ul aria-labelledby="#summary">
     <li v-for="todo in todoItems" v-bind:key="todo.id">
       <todo-item v-bind:label="todo.label" v-bind:done="todo.done" v-bind:id="todo.id" v-on:checkbox-changed="updateCheckbox(todo.id)" 
@@ -48,6 +48,7 @@ export default {
     deleteTask(taskID) {
       const i = this.todoItems.findIndex((item) => item.id === taskID);
       this.todoItems.splice(i, 1);
+      this.$refs.summary.focus();
     }
   },
   computed: {
