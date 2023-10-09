@@ -25,11 +25,9 @@ export default {
   data() {
     return {
       todoItems: [
-        { id: uniqueId('task-'), label: 'receive $200', done: false },
-        { id: uniqueId('task-'), label: 'code', done: true },
-        { id: uniqueId('task-'), label: 'win', done: true },
-        { id: uniqueId('task-'), label: 'drink', done: false },
-        { id: uniqueId('task-'), label: 'get naked', done: false },
+        { id: uniqueId('task-'), label: 'learn vue', done: true },
+        { id: uniqueId('task-'), label: 'make todo app', done: true },
+        { id: uniqueId('task-'), label: 'master vue', done: false },
       ],  
     };
   },
