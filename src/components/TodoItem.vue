@@ -38,7 +38,6 @@
             },
             onEditClick() {
                 this.isEditing = true;
-                console.log(this.$refs.editButton);
             },
             onDeleteClick() {
                 this.$emit('task-deleted');
